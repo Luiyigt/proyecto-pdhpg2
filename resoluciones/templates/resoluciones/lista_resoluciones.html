@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Resoluciones</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Lista de Resoluciones</h1>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Expediente</th>
+                    <th>Denunciante</th>
+                    <th>Víctima</th>
+                    <th>Derecho Humano Violado</th>
+                    <th>Resolución</th>
+                    <th>Calificación</th>
+                    <th>Dirección</th>
+                    <th>Fecha de Resolución</th>
+                    <th>Responsable</th>
+                    <th>Estado</th>
+                    <th>Creado por</th>
+                    <th>Fecha de Creación</th>
+                    <th>Archivo Adjunto</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for resolucion in resoluciones %}
+                <tr>
+                    <td>{{ resolucion.id }}</td>
+                    <td>{{ resolucion.expediente }}</td>
+                    <td>{{ resolucion.denunciante }}</td>
+                    <td>{{ resolucion.victima }}</td>
+                    <td>{{ resolucion.derecho_humano_violado }}</td>
+                    <td>{{ resolucion.resolucion }}</td>
+                    <td>{{ resolucion.calificacion }}</td>
+                    <td>{{ resolucion.direccion }}</td>
+                    <td>{{ resolucion.fecha_resolucion }}</td>
+                    <td>{{ resolucion.responsable }}</td>
+                    <td>{{ resolucion.estado }}</td>
+                    <td>{{ resolucion.creado_por }}</td>
+                    <td>{{ resolucion.fecha_creacion }}</td>
+                    <td>
+                        {% if resolucion.archivo_adjunto %}
+                            <a href="/{{ resolucion.archivo_adjunto }}" target="_blank" class="btn btn-secondary">Ver PDF</a>
+                        {% else %}
+                            No hay archivo
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'detalle_resolucion' resolucion.pk %}" class="btn btn-info">Ver</a>
+                        {% if es_auxiliar_o_superusuario %}
+                            <a href="{% url 'editar_resolucion' resolucion.pk %}" class="btn btn-warning">Editar</a>
+                            <a href="{% url 'eliminar_resolucion' resolucion.pk %}" class="btn btn-danger">Eliminar</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

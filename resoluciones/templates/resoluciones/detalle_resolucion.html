@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Resolución</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Detalle de Resolución</h1>
+        <p><strong>ID:</strong> {{ resolucion.id }}</p>
+        <p><strong>Expediente:</strong> {{ resolucion.expediente }}</p>
+        <p><strong>Denunciante:</strong> {{ resolucion.denunciante }}</p>
+        <p><strong>Víctima:</strong> {{ resolucion.victima }}</p>
+        <p><strong>Derecho Humano Violado:</strong> {{ resolucion.derecho_humano_violado }}</p>
+        <p><strong>Resolución:</strong> {{ resolucion.resolucion }}</p>
+        <p><strong>Calificación:</strong> {{ resolucion.calificacion }}</p>
+        <p><strong>Dirección:</strong> {{ resolucion.direccion }}</p>
+        <p><strong>Fecha de Resolución:</strong> {{ resolucion.fecha_resolucion }}</p>
+        <p><strong>Responsable:</strong> {{ resolucion.responsable }}</p>
+        <p><strong>Estado:</strong> {{ resolucion.estado }}</p>
+        <p><strong>Creado por:</strong> {{ resolucion.creado_por }}</p>
+        <p><strong>Fecha de Creación:</strong> {{ resolucion.fecha_creacion }}</p>
+
+        {% if resolucion.archivo_adjunto %}
+        <p><strong>Archivo Adjunto:</strong> 
+            <a href="/{{ resolucion.archivo_adjunto.name }}" target="_blank">Ver PDF</a>
+            <!-- Alternativa si la URL generada no es correcta -->
+            <!-- <a href="/resoluciones/{{ resolucion.archivo_adjunto.name }}" target="_blank">Ver PDF</a> -->
+        </p>
+        {% endif %}
+
+        <a href="{% url 'lista_resoluciones' %}" class="btn btn-secondary">Volver a la lista</a>
+        {% if es_auxiliar_o_superusuario %}
+            <a href="{% url 'editar_resolucion' resolucion.pk %}" class="btn btn-warning">Editar</a>
+            <a href="{% url 'eliminar_resolucion' resolucion.pk %}" class="btn btn-danger">Eliminar</a>
+        {% endif %}
+    </div>
+</body>
+</html>

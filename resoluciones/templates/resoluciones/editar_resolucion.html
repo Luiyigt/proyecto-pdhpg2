@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Resolución</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Editar Resolución</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <!-- Si hay un archivo adjunto existente, mostrar el enlace para verlo -->
+            {% if resolucion.archivo_adjunto %}
+            <div class="form-group">
+                <label for="archivo_adjunto_actual">Archivo Adjunto Actual:</label>
+                <p><a href="/{{ resolucion.archivo_adjunto }}" target="_blank">Ver PDF Actual</a></p>
+            </div>
+            {% endif %}
+            
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            <a href="{% url 'detalle_resolucion' resolucion.pk %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>
