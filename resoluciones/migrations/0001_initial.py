@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('fecha_resolucion', models.DateField()),
                 ('responsable', models.CharField(blank=True, max_length=255, null=True)),
                 ('estado', models.CharField(choices=[('Pendiente', 'Pendiente'), ('Resuelta', 'Resuelta'), ('En Proceso', 'En Proceso')], max_length=50)),
-                ('archivo_adjunto', models.FileField(blank=True, null=True, upload_to='resoluciones/')),
+                ('archivo_adjunto', models.FileField(blank=True, null=True, upload_to='')),
                 ('fecha_creacion', models.DateTimeField(auto_now_add=True)),
                 ('creado_por', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL)),
             ],

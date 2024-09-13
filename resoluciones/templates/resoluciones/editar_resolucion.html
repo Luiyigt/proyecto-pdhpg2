@@ -17,9 +17,9 @@
             {% if resolucion.archivo_adjunto %}
             <div class="form-group">
                 <label for="archivo_adjunto_actual">Archivo Adjunto Actual:</label>
-                <p><a href="/{{ resolucion.archivo_adjunto }}" target="_blank">Ver PDF Actual</a></p>
+                <p><a href="{{ resolucion.archivo_adjunto.url }}" target="_blank">Ver PDF Actual</a></p>
             </div>
-            {% endif %}
+        {% endif %}        
             
             <button type="submit" class="btn btn-primary">Guardar cambios</button>
             <a href="{% url 'detalle_resolucion' resolucion.pk %}" class="btn btn-secondary">Cancelar</a>

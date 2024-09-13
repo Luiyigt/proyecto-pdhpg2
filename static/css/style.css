@@ -1,0 +1,166 @@
+body {
+    display: flex;
+}
+
+/* Estilo de la barra lateral */
+.sidebar {
+    width: 250px;
+    background-color: #343a40;
+    min-height: 100vh;
+    padding-top: 60px;
+    transition: width 0.3s ease;
+    position: fixed;
+    z-index: 1;
+}
+
+/* Coloca el botón de colapsar dentro del sidebar y arriba */
+.toggle-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    padding: 10px;
+    background-color: #343a40;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.toggle-btn i {
+    font-size: 24px;
+    color: white;
+}
+
+.sidebar a {
+    padding: 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    transition: background 0.3s ease;
+}
+
+.sidebar a:hover {
+    background-color: #007bff;
+}
+
+.sidebar .active {
+    background-color: #007bff;
+    color: white;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    width: 100%;
+    transition: margin-left 0.3s ease;
+}
+
+/* Espaciado adicional para los íconos dentro del menú lateral */
+.sidebar i {
+    margin-right: 15px;
+}
+
+/* Para ocultar la barra lateral */
+.collapsed .sidebar {
+    width: 70px;
+}
+
+.collapsed .main-content {
+    margin-left: 70px;
+}
+
+.collapsed .sidebar a {
+    text-align: center;
+    font-size: 0;
+}
+
+.collapsed .sidebar a i {
+    font-size: 24px;
+}
+
+.collapsed .sidebar a span {
+    display: none;
+}
+
+/* Estilo del menú de usuario en la parte superior derecha */
+.navbar-user {
+    position: fixed;
+    right: 20px;
+    top: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    z-index: 1001;
+    border-radius: 5px;
+}
+
+.navbar-user .dropdown-toggle {
+    color: #343a40;
+    background-color: transparent;
+    border: none;
+}
+
+.navbar-user .dropdown-menu {
+    right: 0;
+    left: auto;
+    position: absolute;
+}
+
+.navbar-user .dropdown-toggle:focus {
+    box-shadow: none;
+}
+
+/* Estilo para el contenedor de los inputs con etiquetas flotantes */
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+/* Estilo para las etiquetas flotantes */
+.form-group label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #999;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    background-color: white;
+    padding: 0 5px;
+}
+
+/* Estilo para los inputs */
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    padding-left: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.2s ease;
+}
+
+/* Cambios cuando el input está enfocado */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Cambia la posición de la etiqueta cuando el input tiene contenido o está enfocado */
+.form-group input:focus + label,
+.form-group textarea:focus + label,
+.form-group select:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group textarea:not(:placeholder-shown) + label,
+.form-group select:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: #007bff;
+    background-color: white;
+    padding: 0 5px;
+}
