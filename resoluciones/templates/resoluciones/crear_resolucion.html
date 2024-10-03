@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Resolución</title>
@@ -133,7 +136,27 @@
         </div>
     </div>
 
-    <script src="{% static 'js/scripts.js' %}"></script>
+    <!-- Script para mostrar íconos cuando el menú está colapsado -->
+    <script>
+        $(document).ready(function() {
+            // Funcionalidad para colapsar el menú
+            $('.toggle-btn').on('click', function() {
+                $('body').toggleClass('collapsed');
+            });
+
+            // Verificar si el menú está colapsado y mostrar solo los íconos
+            $('.sidebar a').each(function() {
+                if ($('body').hasClass('collapsed')) {
+                    $(this).find('span').hide();
+                    $(this).find('i').css('font-size', '24px');
+                } else {
+                    $(this).find('span').show();
+                    $(this).find('i').css('font-size', '16px');
+                }
+            });
+        });
+    </script>
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

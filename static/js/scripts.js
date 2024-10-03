@@ -1,7 +1,15 @@
 $(document).ready(function() { 
-    // Funcionalidad para colapsar el menú
+    // Añadir funcionalidad para colapsar el menú
     $('.toggle-btn').on('click', function() {
-        $('body').toggleClass('collapsed');
+        $('.sidebar').toggleClass('active');  // Activa o desactiva la clase 'active' en la barra lateral
+        $('.main-content').toggleClass('collapsed');  // Ajusta el contenido principal según el estado del menú
+        
+        // Asegura que los íconos mantengan su tamaño adecuado
+        if ($('.sidebar').hasClass('active')) {
+            $('.sidebar a i').css('font-size', '24px');  // Establece el tamaño de los íconos al colapsar
+        } else {
+            $('.sidebar a i').css('font-size', '18px');  // Restablece el tamaño de los íconos cuando se expande
+        }
     });
 
     // Abrir modal de edición de perfil
@@ -91,5 +99,21 @@ $(document).ready(function() {
         if (!$(this).val()) {
             $(this).siblings('label').removeClass('float');  // Remueve la clase 'float' si el campo está vacío al perder el foco
         }
+    });
+
+    // Agregar funcionalidad dinámica al login
+    const btnSignIn = document.getElementById("sign-in"),
+          btnSignUp = document.getElementById("sign-up"),
+          containerFormRegister = document.querySelector(".register"),
+          containerFormLogin = document.querySelector(".login");
+
+    btnSignIn.addEventListener("click", e => {
+        containerFormRegister.classList.add("hide");
+        containerFormLogin.classList.remove("hide");
+    });
+
+    btnSignUp.addEventListener("click", e => {
+        containerFormLogin.classList.add("hide");
+        containerFormRegister.classList.remove("hide");
     });
 });

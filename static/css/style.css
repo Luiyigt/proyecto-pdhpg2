@@ -8,7 +8,7 @@ body {
     background-color: #343a40;
     min-height: 100vh;
     padding-top: 60px;
-    transition: width 0.3s ease;
+    transition: width 0.3s ease;  /* Transición suave para el ancho */
     position: fixed;
     z-index: 1;
 }
@@ -62,6 +62,17 @@ body {
 }
 
 /* Para ocultar la barra lateral */
+.sidebar.active {
+    width: 0;
+    overflow: hidden;
+}
+
+/* Cuando la barra lateral está oculta, el contenido principal ocupa todo el espacio */
+.sidebar.active + .main-content {
+    margin-left: 0;
+}
+
+/* Ajustar el tamaño de los iconos cuando el menú está colapsado */
 .collapsed .sidebar {
     width: 70px;
 }
@@ -70,15 +81,18 @@ body {
     margin-left: 70px;
 }
 
+/* Iconos en el menú lateral cuando está colapsado */
 .collapsed .sidebar a {
     text-align: center;
     font-size: 0;
 }
 
+/* Aquí se ajusta el tamaño de los íconos al colapsar */
 .collapsed .sidebar a i {
-    font-size: 24px;
+    font-size: 24px; /* Asegura que el tamaño del icono sea 24px cuando está colapsado */
 }
 
+/* Se oculta el texto del menú al colapsar */
 .collapsed .sidebar a span {
     display: none;
 }
@@ -163,4 +177,12 @@ body {
     color: #007bff;
     background-color: white;
     padding: 0 5px;
+}
+.floating-alerts {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    width: auto;
+    max-width: 300px;
 }

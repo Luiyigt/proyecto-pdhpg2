@@ -4,17 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Usuario</title>
+    {% load static %} <!-- Carga de archivos estáticos -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"> <!-- Enlace a tu archivo de estilos -->
 </head>
 <body>
-    <div class="container mt-5">
-        <h1>Editar Usuario</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-            <a href="{% url 'lista_usuarios' %}" class="btn btn-secondary">Cancelar</a>
-        </form>
+    <div class="container-form">
+        <!-- Información lateral -->
+        <div class="information">
+            <div class="info-childs">
+                <h2>Editar Usuario</h2>
+                <p>Modifica los datos del usuario seleccionado.</p>
+                <a href="{% url 'lista_usuarios' %}" class="btn btn-primary">Regresar</a>
+            </div>
+        </div>
+
+        <!-- Formulario de edición de usuario -->
+        <div class="form-information edit-user">
+            <div class="form-information-childs">
+                <h2>Editar Usuario</h2>
+                <p>Actualiza los siguientes datos:</p>
+
+                <form method="post" class="form">
+                    {% csrf_token %}
+                    <label for="username">
+                        <i class="fas fa-user"></i>
+                        {{ form.username }}
+                    </label>
+                    <label for="email">
+                        <i class="fas fa-envelope"></i>
+                        {{ form.email }}
+                    </label>
+
+                    <!-- Selección del rol -->
+                    <label for="role">
+                        <i class="fas fa-users-cog"></i>
+                        <select name="role" class="form-control">
+                            <option value="Administrador" {% if "Administrador" in user.groups.all %}selected{% endif %}>Administrador</option>
+                            <option value="Auxiliar" {% if "Auxiliar" in user.groups.all %}selected{% endif %}>Auxiliar</option>
+                            <option value="Secretaria" {% if "Secretaria" in user.groups.all %}selected{% endif %}>Secretaria</option>
+                        </select>
+                    </label>
+
+                    <input type="submit" class="btn btn-success" value="Guardar Cambios">
+                </form>
+            </div>
+        </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </body>
 </html>

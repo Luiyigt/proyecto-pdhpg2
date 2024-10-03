@@ -27,6 +27,12 @@ INSTALLED_APPS = [
     'usuarios',
     'resoluciones',
     'django_extensions',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 MIDDLEWARE = [
@@ -37,6 +43,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'pdhpg2.urls'
@@ -121,4 +128,23 @@ LOGIN_REDIRECT_URL = 'lista_resoluciones'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'luismazariegos318@gmail.com'  # dirección de correo electrónico de Gmail
+EMAIL_HOST_PASSWORD = 'khribhzfhczdjzib'  # La contraseña de aplicación generada por Google
+DEFAULT_FROM_EMAIL = 'luiyimaza@gmail.com'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
+
+DEFAULT_FROM_EMAIL = 'luismazariegos318@gmail.com'
+SERVER_EMAIL = 'luismazariegos318@gmail.com'
+EMAIL_SUBJECT_PREFIX = '[PDH SOLOLA 2024] '
 

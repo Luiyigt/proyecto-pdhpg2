@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de Resoluciones</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Reporte de Resoluciones</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Expediente</th>
+                <th>Denunciante</th>
+                <th>Fecha Resolución</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for resolucion in resoluciones %}
+                <tr>
+                    <td>{{ resolucion.id }}</td>
+                    <td>{{ resolucion.expediente }}</td>
+                    <td>{{ resolucion.denunciante }}</td>
+                    <td>{{ resolucion.fecha_resolucion }}</td>
+                    <td>{{ resolucion.estado }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

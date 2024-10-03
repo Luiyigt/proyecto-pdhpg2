@@ -5,6 +5,10 @@ from .models import ResolucionFinal
 from .forms import ResolucionForm
 from django.contrib import messages  # Importar para manejar los mensajes
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from weasyprint import HTML  # Importar para generar PDF
+import pandas as pd  # Importar para generar Excel
 
 @login_required
 def lista_resoluciones(request):
@@ -82,3 +86,42 @@ def eliminar_resolucion(request, pk):
         messages.success(request, 'Resolución eliminada exitosamente.')
         return redirect('lista_resoluciones')  # Redirigir a la lista después de eliminar
     return render(request, 'resoluciones/eliminar_resolucion.html', {'resolucion': resolucion})
+
+# --- NUEVAS FUNCIONALIDADES DE REPORTE PDF Y EXCEL ---
+
+# Generación de reportes en PDF
+@login_required
+def generar_reporte_pdf(request):
+    resoluciones = ResolucionFinal.objects.all()
+
+    # Renderizar la plantilla de reporte PDF
+    html_string = render_to_string('resoluciones/reporte_pdf.html', {'resoluciones': resoluciones})
+
+    # Crear el PDF
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="reporte_resoluciones.pdf"'
+    HTML(string=html_string).write_pdf(response)
+
+    return response
+
+# Generación de reportes en Excel
+@login_required
+def generar_reporte_excel(request):
+    resoluciones = ResolucionFinal.objects.all()
+
+    # Crear DataFrame con los datos de las resoluciones
+    data = {
+        'ID': [r.id for r in resoluciones],
+        'Expediente': [r.expediente for r in resoluciones],
+        'Denunciante': [r.denunciante for r in resoluciones],
+        'Fecha Resolución': [r.fecha_resolucion for r in resoluciones],
+        'Estado': [r.estado for r in resoluciones],
+    }
+    df = pd.DataFrame(data)
+
+    # Crear el archivo Excel
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename="reporte_resoluciones.xlsx"'
+    df.to_excel(response, index=False)
+
+    return response

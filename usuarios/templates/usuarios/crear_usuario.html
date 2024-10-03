@@ -4,18 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Usuario</title>
+    {% load static %}
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-5">
-        <h1>Crear Usuario</h1>
-        <!-- crear_usuario.html -->
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Crear Usuario</button>
-    <a href="{% url 'vista_administrador' %}" class="btn btn-secondary">Cancelar</a> <!-- Modificar aquí -->
-</form>
+    <!-- Contenedor principal -->
+    <div class="container-form">
+        <!-- Información lateral -->
+        <div class="information">
+            <div class="info-childs">
+                <h2>Bienvenido</h2>
+                <p>Por favor, crea un nuevo usuario y define su rol en el sistema.</p>
+                <a href="{% url 'vista_administrador' %}" class="btn btn-primary">Regresar</a>
+            </div>
+        </div>
+
+        <!-- Formulario de creación de usuario -->
+        <div class="form-information register">
+            <div class="form-information-childs">
+                <h2>Crear Usuario</h2>
+                <p>Completa los siguientes datos:</p>
+
+                <!-- Mensajes de éxito/error -->
+                {% if messages %}
+                <div class="floating-alerts">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <form method="post" class="form">
+                    {% csrf_token %}
+                    <label for="username">
+                        <i class="fas fa-user"></i>
+                        {{ form.username }}
+                    </label>
+                    <label for="email">
+                        <i class="fas fa-envelope"></i>
+                        {{ form.email }}
+                    </label>
+                    <label for="password1">
+                        <i class="fas fa-lock"></i>
+                        {{ form.password1 }}
+                    </label>
+                    <label for="password2">
+                        <i class="fas fa-lock"></i>
+                        {{ form.password2 }}
+                    </label>
+
+                    <!-- Selección del rol -->
+                    <label for="role">
+                        <i class="fas fa-users-cog"></i>
+                        <select name="role" class="form-control">
+                            <option value="Administrador">Administrador</option>
+                            <option value="Auxiliar">Auxiliar</option>
+                            <option value="Secretaria">Secretaria</option>
+                        </select>
+                    </label>
+
+                    <input type="submit" class="btn btn-success" value="Crear Usuario">
+                </form>
+            </div>
+        </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript para cerrar automáticamente las alertas después de 5 segundos -->
+    <script>
+        setTimeout(function() {
+            $('.alert').alert('close');
+        }, 5000);  // 5000 milisegundos = 5 segundos
+    </script>
 </body>
 </html>

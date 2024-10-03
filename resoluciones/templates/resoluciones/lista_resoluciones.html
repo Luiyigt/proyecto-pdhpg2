@@ -14,20 +14,19 @@
 </head>
 <body>
 
-    <!-- Modal de opciones de usuario -->
-<nav class="navbar navbar-light bg-light justify-content-end">
-    <div class="dropdown navbar-user">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-user"></i> {{ request.user.username }}
-        </button>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-            <!-- Enlace a la vista de editar perfil -->
-            <a class="dropdown-item" href="{% url 'editar_perfil' %}">Editar Perfil</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a>
+    <!-- Barra superior con el nombre de usuario -->
+    <nav class="navbar navbar-light bg-light justify-content-end">
+        <div class="dropdown navbar-user">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user"></i> {{ request.user.username }}
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="{% url 'editar_perfil' %}">Editar Perfil</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <!-- Botón para colapsar el menú -->
     <div class="toggle-btn">
@@ -56,6 +55,16 @@
     <!-- Contenido principal -->
     <div class="main-content">
         <h1>Lista de Resoluciones</h1>
+
+        <!-- Botones para exportar PDF y Excel -->
+        <div class="mb-4">
+            <a href="{% url 'generar_reporte_pdf' %}" class="btn btn-danger">
+                <i class="fas fa-file-pdf"></i> Exportar PDF
+            </a>
+            <a href="{% url 'generar_reporte_excel' %}" class="btn btn-success">
+                <i class="fas fa-file-excel"></i> Exportar Excel
+            </a>
+        </div>
 
         <!-- Formulario de Búsqueda General -->
         <div class="form-inline mb-4">
@@ -136,7 +145,7 @@
         </div>
     </div>
 
-    <!-- JavaScript para búsqueda en tiempo real -->
+    <!-- JavaScript para búsqueda en tiempo real y para el menú -->
     <script>
         $(document).ready(function() {
             // Búsqueda en tiempo real
@@ -168,6 +177,11 @@
                         console.error("Error al restablecer: ", error);
                     }
                 });
+            });
+
+            // Funcionalidad para colapsar el menú
+            $('.toggle-btn').on('click', function() {
+                $('body').toggleClass('collapsed');
             });
         });
     </script>
