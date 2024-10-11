@@ -4,24 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <!-- Cargar etiquetas estáticas -->
     {% load static %}
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome CDN para íconos -->
+    <!-- Font Awesome para íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
-<body>
+<body style="background-image: url('{% static 'img/paisaje.jpg' %}'); background-size: cover; background-position: center;">
 
     <div class="container-form">
+        <!-- Sección del logo con fondo celeste -->
+        <div class="logo-section">
+            <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo-img">
+        </div>
+
         <!-- Información lateral -->
         <div class="information">
             <div class="info-childs">
                 <h2>Bienvenido</h2>
                 <p>Accede con tus credenciales o regístrate para crear una nueva cuenta.</p>
-                <input type="button" id="sign-up" value="Regístrate">
+                <!-- Botón de registro redirige a la vista de creación de usuario -->
+                <a href="{% url 'crear_usuario' %}" class="btn btn-primary" id="sign-up">Regístrate</a>
             </div>
         </div>
 
@@ -41,52 +46,15 @@
                         <i class="fas fa-lock"></i>
                         <input type="password" name="password" placeholder="Contraseña">
                     </label>
-                    <input type="submit" value="Iniciar Sesión">
+                    <input type="submit" value="Iniciar Sesión" id="sign-in">
                 </form>
-
-                <!-- Puedes eliminar o comentar las siguientes líneas hasta que configures la autenticación social -->
-                <!-- <div class="icons">
-                    <i class="fab fa-facebook"></i>
-                    <i class="fab fa-google"></i>
-                </div> -->
 
                 <p><a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a></p>
-                <p>¿No tienes una cuenta? <a href="{% url 'crear_usuario' %}" id="sign-up">Regístrate</a></p>
-            </div>
-        </div>
-
-        <!-- Formulario de registro (Oculto inicialmente) -->
-        <div class="form-information register hide">
-            <div class="form-information-childs">
-                <h2>Regístrate</h2>
-                <p>Crea una cuenta para acceder:</p>
-
-                <form method="post" action="{% url 'crear_usuario' %}" class="form">
-                    {% csrf_token %}
-                    <label for="email">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" name="email" placeholder="Correo electrónico">
-                    </label>
-                    <label for="username">
-                        <i class="fas fa-user"></i>
-                        <input type="text" name="username" placeholder="Nombre de usuario">
-                    </label>
-                    <label for="password">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" name="password" placeholder="Contraseña">
-                    </label>
-                    <input type="submit" value="Registrarse">
-                </form>
-
-                <p>¿Ya tienes una cuenta? <a href="#" id="sign-in">Iniciar sesión</a></p>
             </div>
         </div>
     </div>
 
-    <!-- Script para manejar el cambio entre login y registro -->
-    <script src="{% static 'js/login.js' %}"></script>
-
-    <!-- Bootstrap JS and dependencies -->
+    <!-- Bootstrap JS y dependencias -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

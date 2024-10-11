@@ -1,57 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Usuario</title>
-    {% load static %} <!-- Carga de archivos estáticos -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{% static 'css/style.css' %}" rel="stylesheet"> <!-- Enlace a tu archivo de estilos -->
-</head>
-<body>
-    <div class="container-form">
-        <!-- Información lateral -->
-        <div class="information">
-            <div class="info-childs">
-                <h2>Editar Usuario</h2>
-                <p>Modifica los datos del usuario seleccionado.</p>
-                <a href="{% url 'lista_usuarios' %}" class="btn btn-primary">Regresar</a>
-            </div>
+{% extends 'base.html' %}
+
+{% block title %}Editar Usuario{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Título de la página -->
+    <h1 class="text-center mb-4 font-weight-bold text-primary">Editar Usuario</h1>
+
+    <!-- Formulario de edición de usuario -->
+    <div class="card shadow-lg p-4 mb-5 rounded mx-auto" style="max-width: 600px; background-color: #f8f9fa; border: none;">
+        <div class="card-header bg-primary text-white">
+            <h2 class="text-center">Editar Usuario</h2>
         </div>
-
-        <!-- Formulario de edición de usuario -->
-        <div class="form-information edit-user">
-            <div class="form-information-childs">
-                <h2>Editar Usuario</h2>
-                <p>Actualiza los siguientes datos:</p>
-
-                <form method="post" class="form">
-                    {% csrf_token %}
+        <div class="card-body">
+            <p>Modifica los datos del usuario seleccionado.</p>
+            <form method="post" class="form">
+                {% csrf_token %}
+                <div class="form-group detail-item">
                     <label for="username">
-                        <i class="fas fa-user"></i>
-                        {{ form.username }}
+                        <i class="fa fa-user"></i> Nombre de Usuario:
                     </label>
+                    <div class="bg-white p-2 rounded shadow-sm detail-content">{{ form.username }}</div>
+                </div>
+
+                <div class="form-group detail-item">
                     <label for="email">
-                        <i class="fas fa-envelope"></i>
-                        {{ form.email }}
+                        <i class="fa fa-envelope"></i> Correo Electrónico:
                     </label>
+                    <div class="bg-white p-2 rounded shadow-sm detail-content">{{ form.email }}</div>
+                </div>
 
-                    <!-- Selección del rol -->
+                <!-- Selección del rol -->
+                <div class="form-group detail-item">
                     <label for="role">
-                        <i class="fas fa-users-cog"></i>
-                        <select name="role" class="form-control">
-                            <option value="Administrador" {% if "Administrador" in user.groups.all %}selected{% endif %}>Administrador</option>
-                            <option value="Auxiliar" {% if "Auxiliar" in user.groups.all %}selected{% endif %}>Auxiliar</option>
-                            <option value="Secretaria" {% if "Secretaria" in user.groups.all %}selected{% endif %}>Secretaria</option>
-                        </select>
+                        <i class="fa fa-users-cog"></i> Rol:
                     </label>
+                    <select name="role" class="form-control bg-white p-2 rounded shadow-sm detail-content">
+                        <option value="Administrador" {% if "Administrador" in user.groups.all %}selected{% endif %}>Administrador</option>
+                        <option value="Auxiliar" {% if "Auxiliar" in user.groups.all %}selected{% endif %}>Auxiliar</option>
+                        <option value="Secretaria" {% if "Secretaria" in user.groups.all %}selected{% endif %}>Secretaria</option>
+                    </select>
+                </div>
 
-                    <input type="submit" class="btn btn-success" value="Guardar Cambios">
-                </form>
+                <!-- Cambio de contraseña -->
+                <div class="form-group detail-item">
+                    <label for="new_password1">
+                        <i class="fa fa-lock"></i> Nueva Contraseña:
+                    </label>
+                    <input type="password" name="new_password1" class="form-control bg-white p-2 rounded shadow-sm detail-content" placeholder="Ingrese la nueva contraseña">
+                </div>
+
+                <div class="form-group detail-item">
+                    <label for="new_password2">
+                        <i class="fa fa-lock"></i> Confirmar Nueva Contraseña:
+                    </label>
+                    <input type="password" name="new_password2" class="form-control bg-white p-2 rounded shadow-sm detail-content" placeholder="Confirme la nueva contraseña">
+                </div>
+
+                <!-- Botones -->
+                <div class="form-group text-center">
+                    <input type="submit" class="btn btn-success shadow-sm animated-btn" value="Guardar Cambios">
+                    <a href="{% url 'lista_usuarios' %}" class="btn btn-secondary shadow-sm animated-btn">Cancelar</a>
+                </div>
+            </form>
+            
+            <!-- Opción de restablecimiento de contraseña -->
+            <div class="text-center mt-3">
+                <p>¿Olvidaste tu contraseña?</p>
+                <a href="{% url 'password_reset' %}" class="btn btn-warning shadow-sm animated-btn">Restablecer Contraseña</a>
             </div>
         </div>
     </div>
+</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-</body>
-</html>
+<!-- CSS adicional para estilos y animaciones -->
+<style>
+    /* Estilo de los detalles */
+    .detail-content {
+        transition: all 0.3s ease;
+    }
+    .detail-content:hover {
+        background-color: #e2e6ea;
+        transform: scale(1.05);
+    }
+
+    /* Ícono de usuario animado */
+    .navbar-user .btn .fa-user-circle {
+        color: #007bff;
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+    .navbar-user .btn:hover .fa-user-circle {
+        color: #0056b3;
+        transform: scale(1.2);
+    }
+
+    /* Botones animados */
+    .animated-btn {
+        transition: all 0.3s ease;
+    }
+    .animated-btn:hover {
+        background-color: #343a40 !important;
+        color: #ffffff !important;
+        transform: translateY(-3px);
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Tarjeta con sombra y fondo claro */
+    .card {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    }
+</style>
+{% endblock %}

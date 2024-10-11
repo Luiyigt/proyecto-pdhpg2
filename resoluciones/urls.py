@@ -16,5 +16,7 @@ urlpatterns = [
 
     # Ruta para eliminar una resolución existente
     path('resolucion/<int:pk>/eliminar/', views.eliminar_resolucion, name='eliminar_resolucion'),
+    path('reportes/', views.lista_reportes, name='lista_reportes'),
+    path('dashboard/', views.dashboard_view, name='dashboard'),
     
 ]

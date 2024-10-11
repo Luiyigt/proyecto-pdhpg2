@@ -5,7 +5,9 @@ from resoluciones import views as resoluciones_views  # Importar las vistas desd
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
-from usuarios.views import enviar_correo_prueba, SendEmailView  # Corregir la importación aquí
+from usuarios.views import  SendEmailView  # Corregir la importación aquí
+from resoluciones.views import dashboard_view
+from resoluciones import views
 
 urlpatterns = [
     path('password-reset/', 
@@ -18,11 +20,12 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     # Ruta al panel de administración de Django
     path('admin/', admin.site.urls),
-    path('enviar-correo/', enviar_correo_prueba),  # Añadir esta línea
+    # Añadir esta línea
     path('send-email/', SendEmailView.as_view(), name='send_email'),
 
     # Autenticación
     path('login/', usuarios_views.login_view, name='login'),  # Ruta para el login
+    path('accounts/', include('allauth.urls')),  # Agrega esta línea
     path('logout/', usuarios_views.logout_view, name='logout'),  # Ruta para el logout
     # Rutas para la funcionalidad de restablecimiento de contraseña
     path('password-reset/', 
@@ -42,6 +45,7 @@ urlpatterns = [
     path('admin-view/', usuarios_views.vista_administrador, name='vista_administrador'),  # Vista de administrador
     path('auxiliar-view/', usuarios_views.vista_auxiliar, name='vista_auxiliar'),  # Vista de auxiliar
     path('secretaria-view/', usuarios_views.vista_secretaria, name='vista_secretaria'),  # Vista de secretaria
+    path('policia/', usuarios_views.vista_policia, name='vista_policia'),
 
     # Redirección a la vista de login si el usuario no está autenticado
     path('', usuarios_views.login_view, name='home'),
@@ -54,14 +58,20 @@ urlpatterns = [
     path('editar-usuario/<int:user_id>/', usuarios_views.editar_usuario, name='editar_usuario'),  # Ruta para editar usuarios
     path('lista-usuarios/', usuarios_views.lista_usuarios, name='lista_usuarios'),  # Ruta para listar usuarios
     path('eliminar-usuario/<int:user_id>/', usuarios_views.eliminar_usuario, name='eliminar_usuario'),  # Ruta para eliminar usuarios
-
+    
     # Nueva ruta para editar perfil
     path('editar-perfil/', usuarios_views.editar_perfil, name='editar_perfil'),  # Ruta para editar perfil actual
 
     # Rutas para generar reportes PDF y Excel de resoluciones
+    path('dashboard/', dashboard_view, name='dashboard'),
+    path('filtrar_grafica/', views.filtrar_grafica, name='filtrar_grafica'),
     path('resoluciones/reporte/pdf/', resoluciones_views.generar_reporte_pdf, name='generar_reporte_pdf'),  # Ruta para generar PDF
     path('resoluciones/reporte/excel/', resoluciones_views.generar_reporte_excel, name='generar_reporte_excel'),  # Ruta para generar Excel
-]
+    
+    
+     
+  
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # Añadir configuración para servir archivos de medios durante el desarrollo
 if settings.DEBUG:

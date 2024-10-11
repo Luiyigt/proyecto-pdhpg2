@@ -2,13 +2,33 @@ body {
     display: flex;
 }
 
+/* Estilo de la barra lateral */
 .sidebar {
     width: 250px;
     background-color: #343a40;
     min-height: 100vh;
-    padding-top: 20px;
-    transition: width 0.3s ease;
+    padding-top: 60px;
+    transition: width 0.3s ease;  /* Transición suave para el ancho */
     position: fixed;
+    z-index: 1;
+}
+
+/* Coloca el botón de colapsar dentro del sidebar y arriba */
+.toggle-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    padding: 10px;
+    background-color: #343a40;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.toggle-btn i {
+    font-size: 24px;
+    color: white;
 }
 
 .sidebar a {
@@ -36,19 +56,23 @@ body {
     transition: margin-left 0.3s ease;
 }
 
-.toggle-btn {
-    position: fixed;
-    left: 15px;
-    top: 15px;
-    z-index: 999;
-}
-
-.toggle-btn i {
-    font-size: 24px;
-    color: #343a40;
+/* Espaciado adicional para los íconos dentro del menú lateral */
+.sidebar i {
+    margin-right: 15px;
 }
 
 /* Para ocultar la barra lateral */
+.sidebar.active {
+    width: 0;
+    overflow: hidden;
+}
+
+/* Cuando la barra lateral está oculta, el contenido principal ocupa todo el espacio */
+.sidebar.active + .main-content {
+    margin-left: 0;
+}
+
+/* Ajustar el tamaño de los iconos cuando el menú está colapsado */
 .collapsed .sidebar {
     width: 70px;
 }
@@ -57,15 +81,108 @@ body {
     margin-left: 70px;
 }
 
+/* Iconos en el menú lateral cuando está colapsado */
 .collapsed .sidebar a {
     text-align: center;
     font-size: 0;
 }
 
+/* Aquí se ajusta el tamaño de los íconos al colapsar */
 .collapsed .sidebar a i {
-    font-size: 24px;
+    font-size: 24px; /* Asegura que el tamaño del icono sea 24px cuando está colapsado */
 }
 
+/* Se oculta el texto del menú al colapsar */
 .collapsed .sidebar a span {
     display: none;
+}
+
+/* Estilo del menú de usuario en la parte superior derecha */
+.navbar-user {
+    position: fixed;
+    right: 20px;
+    top: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    z-index: 1001;
+    border-radius: 5px;
+}
+
+.navbar-user .dropdown-toggle {
+    color: #343a40;
+    background-color: transparent;
+    border: none;
+}
+
+.navbar-user .dropdown-menu {
+    right: 0;
+    left: auto;
+    position: absolute;
+}
+
+.navbar-user .dropdown-toggle:focus {
+    box-shadow: none;
+}
+
+/* Estilo para el contenedor de los inputs con etiquetas flotantes */
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+/* Estilo para las etiquetas flotantes */
+.form-group label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #999;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    background-color: white;
+    padding: 0 5px;
+}
+
+/* Estilo para los inputs */
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    padding-left: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.2s ease;
+}
+
+/* Cambios cuando el input está enfocado */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Cambia la posición de la etiqueta cuando el input tiene contenido o está enfocado */
+.form-group input:focus + label,
+.form-group textarea:focus + label,
+.form-group select:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group textarea:not(:placeholder-shown) + label,
+.form-group select:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: #007bff;
+    background-color: white;
+    padding: 0 5px;
+}
+.floating-alerts {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    width: auto;
+    max-width: 300px;
 }

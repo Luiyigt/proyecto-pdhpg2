@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
 ]
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -51,7 +52,7 @@ ROOT_URLCONF = 'pdhpg2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Aquí especificamos el directorio base de plantillas
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -113,7 +114,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 
@@ -142,9 +143,25 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-SITE_ID = 1
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 DEFAULT_FROM_EMAIL = 'luismazariegos318@gmail.com'
 SERVER_EMAIL = 'luismazariegos318@gmail.com'
 EMAIL_SUBJECT_PREFIX = '[PDH SOLOLA 2024] '
 
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': 'TU_CLIENT_ID_DE_GOOGLE',
+            'secret': 'TU_SECRETO_DE_GOOGLE',
+            'key': ''
+        }
+    },
+    'facebook': {
+        'APP': {
+            'client_id': 'TU_CLIENT_ID_DE_FACEBOOK',
+            'secret': 'TU_SECRETO_DE_FACEBOOK',
+            'key': ''
+        }
+    }
+}
