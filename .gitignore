@@ -1,0 +1,55 @@
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+build/
+dist/
+
+# Django stuff:
+*.log
+db.sqlite3
+db.sqlite3-journal
+media/
+
+# If you're using PostgreSQL:
+*.pgsql
+
+# Ignore the entire media folder except an empty `.gitkeep`
+/media/*
+/media/.gitkeep
+
+# Local environment settings
+.env
+
+# Ignore large media or binary files
+resoluciones/Media/resoluciones/PB_Level_6.pdf
+resoluciones/Media/resoluciones/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Virtual environment
+.venv/
+
+# GitHub large files
+.git/lfs/objects/
+
+'resoluciones/Media/resoluciones/PB_Level_6.pdf' 
+
+
+'resoluciones/Media/resoluciones/PB_Level_6.pdf' 
+'resoluciones/Media/resoluciones/' 
+'resoluciones/Media/resoluciones/' 

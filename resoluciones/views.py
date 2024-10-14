@@ -13,6 +13,7 @@ from django.conf import settings  # Para gestionar rutas estáticas
 from django.contrib.auth.models import User
 from django.db.models import Count
 from django.http import JsonResponse
+from django.core.paginator import Paginator  # Importar Paginator para la paginación
 import datetime
 
 # Función para verificar si el usuario es administrador o superusuario
@@ -22,32 +23,38 @@ def es_administrador_o_superusuario(user):
 @login_required
 def lista_resoluciones(request):
     query = request.GET.get('q', '')  # Obtener el parámetro de búsqueda 'q'
+    per_page = request.GET.get('per_page', 10)  # Obtener el número de resoluciones por página, por defecto 10
     
     # Si hay un término de búsqueda, filtrar por varios campos
     if query:
         resoluciones = ResolucionFinal.objects.filter(
-            Q(expediente__icontains(query)) |
-            Q(denunciante__icontains(query)) |
-            Q(victima__icontains(query)) |
-            Q(derecho_humano_violado__icontains(query)) |
-            Q(resolucion__icontains(query)) |
-            Q(calificacion__icontains(query)) |
-            Q(direccion__icontains(query)) |
-            Q(responsable__icontains(query)) |
-            Q(estado__icontains(query))
+            Q(expediente__icontains=query) |
+            Q(denunciante__icontains=query) |
+            Q(victima__icontains=query) |
+            Q(derecho_humano_violado__icontains=query) |
+            Q(resolucion__icontains=query) |
+            Q(calificacion__icontains=query) |
+            Q(direccion__icontains=query) |
+            Q(responsable__icontains=query) |
+            Q(estado__icontains=query)
         )
     else:
         # Si no hay término de búsqueda, mostrar todas las resoluciones
         resoluciones = ResolucionFinal.objects.all()
 
-    # Verificar si el usuario es auxiliar, superusuario o policía
+    # Paginación
+    paginator = Paginator(resoluciones, per_page)  # Paginador con el número de resoluciones por página
+    page_number = request.GET.get('page')  # Número de página actual
+    page_obj = paginator.get_page(page_number)
+
     es_auxiliar_o_superusuario = request.user.groups.filter(name='Auxiliar').exists() or request.user.is_superuser
     es_policia = request.user.groups.filter(name='policia').exists()
 
     return render(request, 'resoluciones/lista_resoluciones.html', {
-        'resoluciones': resoluciones,
+        'page_obj': page_obj,  # Pasar el objeto de la página
         'es_auxiliar_o_superusuario': es_auxiliar_o_superusuario,
-        'es_policia': es_policia
+        'es_policia': es_policia,
+        'per_page': per_page,  # Pasar el número de elementos por página
     })
 
 @login_required
@@ -144,19 +151,35 @@ def generar_reporte_excel(request):
 
     return response
 
+@login_required
 def lista_reportes(request):
     query = request.GET.get('q', '')  # Obtener el parámetro de búsqueda 'q'
     
+    # Si hay un término de búsqueda, filtrar por varios campos
     if query:
         resoluciones = ResolucionFinal.objects.filter(
-            Q(expediente__icontains(query)) |
-            Q(denunciante__icontains(query))  # Puedes incluir otros campos de búsqueda si es necesario
+            Q(expediente__icontains=query) |
+            Q(denunciante__icontains=query) |
+            Q(victima__icontains=query) |
+            Q(derecho_humano_violado__icontains=query) |
+            Q(resolucion__icontains=query) |
+            Q(calificacion__icontains=query) |
+            Q(direccion__icontains=query) |
+            Q(responsable__icontains=query) |
+            Q(estado__icontains=query)
         )
     else:
+        # Si no hay término de búsqueda, mostrar todas las resoluciones
         resoluciones = ResolucionFinal.objects.all()
+
+    # Verificar si el usuario es auxiliar, superusuario o policía
+    es_auxiliar_o_superusuario = request.user.groups.filter(name='Auxiliar').exists() or request.user.is_superuser
+    es_policia = request.user.groups.filter(name='policia').exists()
 
     return render(request, 'reportes/lista_reportes.html', {
         'resoluciones': resoluciones,
+        'es_auxiliar_o_superusuario': es_auxiliar_o_superusuario,
+        'es_policia': es_policia
     })
 
 @login_required

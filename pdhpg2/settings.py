@@ -104,7 +104,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Guatemala'
+
 
 USE_I18N = True
 
@@ -142,26 +143,11 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-SOCIALACCOUNT_LOGIN_ON_GET = True
+
+SECURE_SSL_REDIRECT = False
 
 DEFAULT_FROM_EMAIL = 'luismazariegos318@gmail.com'
 SERVER_EMAIL = 'luismazariegos318@gmail.com'
 EMAIL_SUBJECT_PREFIX = '[PDH SOLOLA 2024] '
-
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'APP': {
-            'client_id': 'TU_CLIENT_ID_DE_GOOGLE',
-            'secret': 'TU_SECRETO_DE_GOOGLE',
-            'key': ''
-        }
-    },
-    'facebook': {
-        'APP': {
-            'client_id': 'TU_CLIENT_ID_DE_FACEBOOK',
-            'secret': 'TU_SECRETO_DE_FACEBOOK',
-            'key': ''
-        }
-    }
-}

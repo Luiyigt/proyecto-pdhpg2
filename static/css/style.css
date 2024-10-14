@@ -1,12 +1,20 @@
+/* Colores de la paleta proporcionada */
+.color1 { color: #000009; }
+.color2 { color: #002e50; }
+.color3 { color: #0066a3; }
+.color4 { color: #00a8ff; }
+.color5 { color: #00f4ff; }
+
 /* Estilo de la barra lateral */
 body {
     display: flex;
+    background-color: #002e50; /* Usar color2 para el fondo */
 }
 
 /* Ajustes para la barra lateral */
 .sidebar {
     width: 250px;
-    background-color: #343a40;
+    background-color: #0066a3; /* Usar color3 para la barra lateral */
     min-height: 100vh;
     padding-top: 60px;
     transition: width 0.3s ease;
@@ -14,14 +22,13 @@ body {
     z-index: 1;
 }
 
-/* Coloca el botón de colapsar dentro del sidebar y arriba */
 .toggle-btn {
     position: absolute;
     top: 10px;
     left: 10px;
     z-index: 1000;
     padding: 10px;
-    background-color: #343a40;
+    background-color: #0066a3; /* Usar color3 */
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     cursor: pointer;
@@ -29,43 +36,41 @@ body {
 
 .toggle-btn i {
     font-size: 24px;
-    color: white;
+    color: #00f4ff; /* Usar color5 para íconos */
 }
 
 .sidebar a {
     padding: 15px;
     text-decoration: none;
     font-size: 18px;
-    color: white;
+    color: white; /* Mantener texto blanco */
     display: block;
     transition: background 0.3s ease;
 }
 
 .sidebar a:hover {
-    background-color: #007bff;
+    background-color: #00a8ff; /* Usar color4 para el hover */
 }
 
 .sidebar .active {
-    background-color: #007bff;
+    background-color: #00a8ff; /* Usar color4 para el estado activo */
     color: white;
 }
 
 .main-content {
     margin-left: 250px;
     padding: 20px;
-    width: 80%; /* Ajuste de ancho para que se vea centrado */
+    width: 80%;
     transition: margin-left 0.3s ease;
 }
 
-/* Contenido principal centrado */
 .content {
-    margin-left: 260px; /* Asegura espacio cuando el sidebar está expandido */
+    margin-left: 260px;
     padding: 20px;
     width: calc(100% - 260px);
-    transition: all 0.3s ease;
     display: flex;
-    justify-content: center; /* Centra horizontalmente el contenido */
-    align-items: center; /* Centra verticalmente si es necesario */
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
     box-sizing: border-box;
 }
@@ -80,24 +85,10 @@ body {
     width: calc(100% - 70px);
 }
 
-/* Ajuste para elementos internos en el contenedor principal */
-.content > div, .content > form, .content > section {
-    max-width: 800px; /* Define un ancho máximo para centrar el contenido */
-    width: 100%;
-}
-
-/* Espaciado adicional para los íconos dentro del menú lateral */
 .sidebar i {
     margin-right: 15px;
 }
 
-/* Para ocultar la barra lateral */
-.sidebar.active {
-    width: 0;
-    overflow: hidden;
-}
-
-/* Iconos en el menú lateral cuando está colapsado */
 .collapsed .sidebar a {
     text-align: center;
     font-size: 0;
@@ -107,7 +98,6 @@ body {
     font-size: 24px; /* Asegura que el tamaño del icono sea 24px cuando está colapsado */
 }
 
-/* Se oculta el texto del menú al colapsar */
 .collapsed .sidebar a span {
     display: none;
 }
@@ -124,7 +114,7 @@ body {
 }
 
 .navbar-user .dropdown-toggle {
-    color: #343a40;
+    color: #002e50; /* Usar color2 para los íconos del menú de usuario */
     background-color: transparent;
     border: none;
 }
@@ -139,13 +129,11 @@ body {
     box-shadow: none;
 }
 
-/* Estilo para el contenedor de los inputs con etiquetas flotantes */
 .form-group {
     position: relative;
     margin-bottom: 1.5rem;
 }
 
-/* Estilo para las etiquetas flotantes */
 .form-group label {
     position: absolute;
     top: 50%;
@@ -158,7 +146,6 @@ body {
     padding: 0 5px;
 }
 
-/* Estilo para los inputs */
 .form-group input,
 .form-group textarea,
 .form-group select {
@@ -175,11 +162,10 @@ body {
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-    border-color: #007bff;
+    border-color: #00a8ff; /* Usar color4 */
     outline: none;
 }
 
-/* Cambia la posición de la etiqueta cuando el input tiene contenido o está enfocado */
 .form-group input:focus + label,
 .form-group textarea:focus + label,
 .form-group select:focus + label,
@@ -189,7 +175,7 @@ body {
     top: -10px;
     left: 10px;
     font-size: 12px;
-    color: #007bff;
+    color: #00a8ff; /* Usar color4 */
     background-color: white;
     padding: 0 5px;
 }
@@ -201,4 +187,88 @@ body {
     z-index: 1050;
     width: auto;
     max-width: 300px;
+}
+
+/* Estilo de la barra lateral */
+body {
+    display: flex;
+}
+
+/* Ajustes cuando la barra lateral está colapsada */
+.collapsed .sidebar {
+    width: 70px;
+}
+
+.collapsed .content {
+    margin-left: 70px;
+}
+
+.sidebar.active {
+    width: 0;
+    overflow: hidden;
+}
+
+.sidebar i {
+    margin-right: 15px;
+}
+
+/* Estilo para el contenido principal */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    width: 80%; 
+    transition: margin-left 0.3s ease;
+}
+
+/* Contenido principal centrado */
+.content {
+    margin-left: 260px;
+    padding: 20px;
+    width: calc(100% - 260px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Ajustes para ocultar íconos y texto al colapsar la barra lateral */
+.collapsed .sidebar a {
+    text-align: center;
+    font-size: 0;
+}
+
+.collapsed .sidebar a i {
+    font-size: 24px;
+}
+
+.collapsed .sidebar a span {
+    display: none;
+}
+
+/* Ajuste para el menú superior de usuario */
+.navbar-user {
+    position: fixed;
+    right: 20px;
+    top: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    z-index: 1001;
+    border-radius: 5px;
+}
+
+.navbar-user .dropdown-toggle {
+    color: #002e50;
+    background-color: transparent;
+    border: none;
+}
+
+.navbar-user .dropdown-menu {
+    right: 0;
+    left: auto;
+    position: absolute;
+}
+
+.navbar-user .dropdown-toggle:focus {
+    box-shadow: none;
 }
