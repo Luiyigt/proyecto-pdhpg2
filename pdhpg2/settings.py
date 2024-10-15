@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-
+PORT = os.environ.get('PORT', '8000')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -143,7 +143,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['proyecto-pdhpg2.onrender.com', 'localhost', '127.0.0.1']
+
 
 
 SECURE_SSL_REDIRECT = False
