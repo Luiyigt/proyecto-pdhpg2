@@ -1,8 +1,7 @@
 from pathlib import Path
 import os
-import dj_database_url
 
-PORT = os.environ.get('PORT', '8000')
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -61,15 +60,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'pdhpg2.wsgi.application'
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',  # Asegura que el motor de PostgreSQL esté configurado
-        'NAME': os.environ.get('pdhpg2'),
-        'USER': os.environ.get('pdhpg2_user'),
-        'PASSWORD': os.environ.get('EtAjwi3q6YGFA78syH9SwvwCrzfjrN59'),
-        'HOST': os.environ.get('dpg-cs72oe56l47c73900hag-a'),
-        'PORT': os.environ.get('5432'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'pdhpg2'),  # Coloca el nombre correcto
+        'USER': os.environ.get('DB_USER', 'pdhpg2_user'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'EtAjwi3q6YGFA78syH9SwvwCrzfjrN59'),
+        'HOST': os.environ.get('DB_HOST', 'dpg-cs72oe56l47c73900hag-a'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
