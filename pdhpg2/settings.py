@@ -63,7 +63,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'pdhpg2.wsgi.application'
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        engine='django.db.backends.postgresql'  # Especifica el motor de PostgreSQL
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = [
