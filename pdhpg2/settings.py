@@ -63,11 +63,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'pdhpg2.wsgi.application'
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),
-        engine='django.db.backends.postgresql'  # Especifica el motor de PostgreSQL
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',  # Asegura que el motor de PostgreSQL esté configurado
+        'NAME': os.environ.get('pdhpg2'),
+        'USER': os.environ.get('pdhpg2_user'),
+        'PASSWORD': os.environ.get('EtAjwi3q6YGFA78syH9SwvwCrzfjrN59'),
+        'HOST': os.environ.get('dpg-cs72oe56l47c73900hag-a'),
+        'PORT': os.environ.get('5432'),
+    }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
