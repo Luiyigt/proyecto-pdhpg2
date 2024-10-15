@@ -9,6 +9,7 @@ from usuarios.views import  SendEmailView  # Corregir la importación aquí
 from resoluciones.views import dashboard_view
 from resoluciones import views
 
+
 urlpatterns = [
     path('password-reset/', 
          auth_views.PasswordResetView.as_view(

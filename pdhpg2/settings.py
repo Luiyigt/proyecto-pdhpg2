@@ -1,12 +1,18 @@
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+import dj_database_url
 
 
+
+
+
+CSRF_TRUSTED_ORIGINS = ['https://proyecto-pdhpg2.onrender.com']
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-%ra=x=d3*16td%mk6#bh!b(!!-75f^zzxbaoq)fon(@p-cyf12'
-DEBUG = True
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-%ra=x=d3*16td%mk6#bh!b(!!-75f^zzxbaoq)fon(@p-cyf12')
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = ['proyecto-pdhpg2.onrender.com', 'localhost', '127.0.0.1']
 
@@ -60,15 +66,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'pdhpg2.wsgi.application'
+
+load_dotenv()
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'pdhpg2'),  # Coloca el nombre correcto
-        'USER': os.environ.get('DB_USER', 'pdhpg2_user'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'EtAjwi3q6YGFA78syH9SwvwCrzfjrN59'),
-        'HOST': os.environ.get('DB_HOST', 'dpg-cs72oe56l47c73900hag-a'),
-        'PORT': os.environ.get('DB_PORT', '5432'),
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL')
+    )
 }
 
 
@@ -94,10 +98,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-MEDIA_URL = ''
-MEDIA_ROOT = r'C:\Users\luism\Escritorio\proyecto pdh pg2\resoluciones\Media'
+# Añade esto si no está configurado
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'lista_resoluciones'
@@ -114,8 +122,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
-
-SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = True
 DEFAULT_FROM_EMAIL = 'luismazariegos318@gmail.com'
 SERVER_EMAIL = 'luismazariegos318@gmail.com'
 EMAIL_SUBJECT_PREFIX = '[PDH SOLOLA 2024] '
