@@ -9,6 +9,13 @@
 @import url(spinners.css);
 @import url(animate.css);
 
+/* Paleta de colores */
+.color1 { color: #000009; }
+.color2 { color: #002e50; }
+.color3 { color: #0066a3; }
+.color4 { color: #00a8ff; }
+.color5 { color: #00f4ff; }
+
 .preloader {
   width: 100%;
   height: 100%;
@@ -27,7 +34,7 @@
 }
 body {
   display: flex;
-  background: #fff;
+  background: #002e50; /* Usar color2 */
   font-family: 'Open Sans', sans-serif;
   margin: 0;
   overflow-x: hidden;
@@ -40,7 +47,7 @@ html {
 }
 .sidebar {
   width: 250px;
-  background-color: #343a40;
+  background-color: #0066a3; /* Usar color3 */
   min-height: 100vh;
   padding-top: 60px;
   transition: width 0.3s ease;
@@ -53,14 +60,14 @@ html {
   left: 10px;
   z-index: 1000;
   padding: 10px;
-  background-color: #343a40;
+  background-color: #0066a3; /* Usar color3 */
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
 .toggle-btn i {
   font-size: 24px;
-  color: white;
+  color: #00f4ff; /* Usar color5 */
 }
 .sidebar a {
   padding: 15px;
@@ -71,10 +78,10 @@ html {
   transition: background 0.3s ease;
 }
 .sidebar a:hover {
-  background-color: #007bff;
+  background-color: #00a8ff; /* Usar color4 */
 }
 .sidebar .active {
-  background-color: #007bff;
+  background-color: #00a8ff; /* Usar color4 */
   color: white;
 }
 .main-content {
@@ -132,7 +139,7 @@ html {
   border-radius: 5px;
 }
 .navbar-user .dropdown-toggle {
-  color: #343a40;
+  color: #002e50; /* Usar color2 */
   background-color: transparent;
   border: none;
 }
@@ -176,9 +183,9 @@ html {
 /* Ajustes específicos para el campo select de Rol */
 .form-group select {
   width: 100%; /* Usa el ancho completo del contenedor */
-  max-width: 400px; /* Ancho máximo para asegurar visibilidad */
-  min-width: 250px; /* Ancho mínimo para asegurar que no sea demasiado pequeño */
-  padding-right: 20px; /* Espacio adicional a la derecha */
+  max-width: 400px; /* Ancho máximo */
+  min-width: 250px; /* Ancho mínimo */
+  padding-right: 20px;
   font-size: 16px;
   color: #333;
   background-color: #f9f9f9;
@@ -200,7 +207,7 @@ html {
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-  border-color: #007bff;
+  border-color: #00a8ff; /* Usar color4 */
   outline: none;
 }
 
