@@ -1,21 +1,15 @@
 from pathlib import Path
 import os
+import dj_database_url
+
 PORT = os.environ.get('PORT', '8000')
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-%ra=x=d3*16td%mk6#bh!b(!!-75f^zzxbaoq)fon(@p-cyf12'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-# Application definition
+ALLOWED_HOSTS = ['proyecto-pdhpg2.onrender.com', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -34,6 +28,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
 ]
+
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -52,7 +47,7 @@ ROOT_URLCONF = 'pdhpg2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Aquí especificamos el directorio base de plantillas
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,22 +62,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pdhpg2.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': '12345',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
-
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -99,56 +81,35 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'America/Guatemala'
-
-
 USE_I18N = True
-
 USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
-
-
 MEDIA_URL = ''
 MEDIA_ROOT = r'C:\Users\luism\Escritorio\proyecto pdh pg2\resoluciones\Media'
 
-
-# URL to redirect for login
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'lista_resoluciones'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'luismazariegos318@gmail.com'  # dirección de correo electrónico de Gmail
-EMAIL_HOST_PASSWORD = 'khribhzfhczdjzib'  # La contraseña de aplicación generada por Google
+EMAIL_HOST_USER = 'luismazariegos318@gmail.com'
+EMAIL_HOST_PASSWORD = 'khribhzfhczdjzib'
 DEFAULT_FROM_EMAIL = 'luiyimaza@gmail.com'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
-ALLOWED_HOSTS = ['proyecto-pdhpg2.onrender.com', 'localhost', '127.0.0.1']
-
-
 
 SECURE_SSL_REDIRECT = False
-
 DEFAULT_FROM_EMAIL = 'luismazariegos318@gmail.com'
 SERVER_EMAIL = 'luismazariegos318@gmail.com'
 EMAIL_SUBJECT_PREFIX = '[PDH SOLOLA 2024] '
