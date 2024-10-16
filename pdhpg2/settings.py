@@ -1,8 +1,5 @@
 from pathlib import Path
 import os
-from dotenv import load_dotenv
-import dj_database_url
-
 
 
 
@@ -11,8 +8,9 @@ CSRF_TRUSTED_ORIGINS = ['https://proyecto-pdhpg2.onrender.com']
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-%ra=x=d3*16td%mk6#bh!b(!!-75f^zzxbaoq)fon(@p-cyf12')
-DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
+SECRET_KEY = 'django-insecure-%ra=x=d3*16td%mk6#bh!b(!!-75f^zzxbaoq)fon(@p-cyf12'
+DEBUG = False
+SECURE_SSL_REDIRECT = True
 
 ALLOWED_HOSTS = ['proyecto-pdhpg2.onrender.com', 'localhost', '127.0.0.1']
 
@@ -66,13 +64,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'pdhpg2.wsgi.application'
-
-load_dotenv()
-
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL')
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'pdhpg2'),  # Coloca el nombre correcto
+        'USER': os.environ.get('DB_USER', 'pdhpg2_user'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'EtAjwi3q6YGFA78syH9SwvwCrzfjrN59'),
+        'HOST': os.environ.get('DB_HOST', 'dpg-cs72oe56l47c73900hag-a'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
+    }
 }
 
 
@@ -106,7 +106,6 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'lista_resoluciones'
 
@@ -122,7 +121,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
-SECURE_SSL_REDIRECT = True
+
+SECURE_SSL_REDIRECT = False
 DEFAULT_FROM_EMAIL = 'luismazariegos318@gmail.com'
 SERVER_EMAIL = 'luismazariegos318@gmail.com'
 EMAIL_SUBJECT_PREFIX = '[PDH SOLOLA 2024] '
