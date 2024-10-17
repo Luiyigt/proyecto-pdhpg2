@@ -9,7 +9,7 @@ CSRF_TRUSTED_ORIGINS = ['https://proyecto-pdhpg2.onrender.com']
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-%ra=x=d3*16td%mk6#bh!b(!!-75f^zzxbaoq)fon(@p-cyf12'
-DEBUG = False
+DEBUG = True
 SECURE_SSL_REDIRECT = True
 
 ALLOWED_HOSTS = ['proyecto-pdhpg2.onrender.com', 'localhost', '127.0.0.1']
