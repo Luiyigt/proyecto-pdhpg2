@@ -12,41 +12,40 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
-<body style="background-image: url('{% static 'img/paisaje.jpg' %}'); background-size: cover; background-position: center;">
+<body style="background-image: url('{% static 'img/paisaje.jpg' %}'); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; display: flex; align-items: center; justify-content: center;">
 
-    <div class="container-form">
+    <div class="container-form" style="display: flex; justify-content: center; align-items: center; border-radius: 20px; box-shadow: 0 5px 7px rgba(0, 0, 0, .1); background-color: rgba(255, 255, 255, 0.9);">
         <!-- Sección del logo con fondo celeste -->
-        <div class="logo-section">
-            <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo-img">
+        <div class="logo-section" style="display: flex; align-items: center; justify-content: center; background-color: #c7eef3; border-top-left-radius: 20px; border-bottom-left-radius: 20px;">
+            <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo-img" style="max-width: 100px;">
         </div>
 
         <!-- Información lateral -->
-        <div class="information">
-            <div class="info-childs">
-                <h2>Bienvenido</h2>
-                <p>Accede con sus credenciales o regístrate para crear una nueva cuenta y loguearse en pdh.</p>
-                <!-- Botón de registro redirige a la vista de creación de usuario -->
-                <a href="{% url 'crear_usuario' %}" class="btn btn-primary" id="sign-up">Regístrate</a>
+        <div class="information" style="width: 40%; display: flex; align-items: center; justify-content: center; background-color: #c7eef3; text-align: center; border-top-left-radius: 20px; border-bottom-left-radius: 20px;">
+            <div class="info-childs" style="width: 100%; padding: 0 30px;">
+                <h2 style="font-size: 2.5rem; color: #333;">Bienvenido</h2>
+                <p style="margin: 15px 0; color: #555;">Accede con sus credenciales o regístrate para crear una nueva cuenta y loguearse en pdh.</p>
+                <a href="{% url 'crear_usuario' %}" class="btn btn-primary" id="sign-up" style="background-color: #007bff; border: none; border-radius: 20px; padding: 10px 20px;">Regístrate</a>
             </div>
         </div>
 
         <!-- Formulario de login -->
-        <div class="form-information login">
-            <div class="form-information-childs">
-                <h2>Iniciar Sesión</h2>
-                <p>Usa tu cuenta registrada:</p>
+        <div class="form-information login" style="width: 60%; display: flex; align-items: center; justify-content: center; background-color: #f8f8f8; border-top-right-radius: 20px; border-bottom-right-radius: 20px;">
+            <div class="form-information-childs" style="padding: 0 30px;">
+                <h2 style="color: #333; font-size: 2rem;">Iniciar Sesión</h2>
+                <p style="color: #555;">Usa tu cuenta registrada:</p>
 
-                <form method="post" class="form">
+                <form method="post" class="form" style="margin: 30px 0;">
                     {% csrf_token %}
-                    <label for="username">
-                        <i class="fas fa-user"></i>
-                        <input type="text" name="username" placeholder="Nombre de usuario">
+                    <label for="username" style="display: flex; align-items: center; margin-bottom: 15px; border-radius: 20px; padding: 0 10px; background-color: #fff; box-shadow: 0 2px 5px rgba(0, 0, 0, .1);">
+                        <i class="fas fa-user" style="color: #a7a7a7;"></i>
+                        <input type="text" name="username" placeholder="Nombre de usuario" style="width: 100%; padding: 10px; background-color: #fff; border: none; outline: none; border-radius: 20px; color: #333;">
                     </label>
-                    <label for="password">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" name="password" placeholder="Contraseña">
+                    <label for="password" style="display: flex; align-items: center; margin-bottom: 15px; border-radius: 20px; padding: 0 10px; background-color: #fff; box-shadow: 0 2px 5px rgba(0, 0, 0, .1);">
+                        <i class="fas fa-lock" style="color: #a7a7a7;"></i>
+                        <input type="password" name="password" placeholder="Contraseña" style="width: 100%; padding: 10px; background-color: #fff; border: none; outline: none; border-radius: 20px; color: #333;">
                     </label>
-                    <input type="submit" value="Iniciar Sesión" id="sign-in">
+                    <input type="submit" value="Iniciar Sesión" id="sign-in" style="background-color: #007bff; color: #fff; border-radius: 20px; border: none; padding: 10px 15px; cursor: pointer; margin-top: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, .1);">
                 </form>
 
                 <p><a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a></p>
