@@ -49,6 +49,7 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'usuarios/login.html', {'form': form})
 
+
 # Función para cerrar sesión
 @login_required
 def logout_view(request):
@@ -130,15 +131,15 @@ def vista_policia(request):
     query = request.GET.get('q')
     if query:
         resoluciones = ResolucionFinal.objects.filter(
-            Q(expediente__icontains(query)) |
-            Q(denunciante__icontains(query)) |
-            Q(victima__icontains(query)) |
-            Q(derecho_humano_violado__icontains(query)) |
-            Q(resolucion__icontains(query)) |
-            Q(calificacion__icontains(query)) |
-            Q(direccion__icontains(query)) |
-            Q(responsable__icontains(query)) |
-            Q(estado__icontains(query))
+            Q(expediente__icontains=query) |
+            Q(denunciante__icontains=query) |
+            Q(victima__icontains=query) |
+            Q(derecho_humano_violado__icontains=query) |
+            Q(resolucion__icontains=query) |
+            Q(calificacion__icontains=query) |
+            Q(direccion__icontains=query) |
+            Q(responsable__icontains=query) |
+            Q(estado__icontains=query)
         )
     else:
         resoluciones = ResolucionFinal.objects.all()
@@ -209,15 +210,15 @@ def vista_auxiliar(request):
     query = request.GET.get('q')
     if query:
         resoluciones = ResolucionFinal.objects.filter(
-            Q(expediente__icontains(query)) |
-            Q(denunciante__icontains(query)) |
-            Q(victima__icontains(query)) |
-            Q(derecho_humano_violado__icontains(query)) |
-            Q(resolucion__icontains(query)) |
-            Q(calificacion__icontains(query)) |
-            Q(direccion__icontains(query)) |
-            Q(responsable__icontains(query)) |
-            Q(estado__icontains(query))
+            Q(expediente__icontains=query) |
+            Q(denunciante__icontains=query) |
+            Q(victima__icontains=query) |
+            Q(derecho_humano_violado__icontains=query) |
+            Q(resolucion__icontains=query) |
+            Q(calificacion__icontains=query) |
+            Q(direccion__icontains=query) |
+            Q(responsable__icontains=query) |
+            Q(estado__icontains=query)
         )
     else:
         resoluciones = ResolucionFinal.objects.all()
@@ -231,15 +232,15 @@ def vista_secretaria(request):
     query = request.GET.get('q')
     if query:
         resoluciones = ResolucionFinal.objects.filter(
-            Q(expediente__icontains(query)) |
-            Q(denunciante__icontains(query)) |
-            Q(victima__icontains(query)) |
-            Q(derecho_humano_violado__icontains(query)) |
-            Q(resolucion__icontains(query)) |
-            Q(calificacion__icontains(query)) |
-            Q(direccion__icontains(query)) |
-            Q(responsable__icontains(query)) |
-            Q(estado__icontains(query))
+            Q(expediente__icontains=query) |
+            Q(denunciante__icontains=query) |
+            Q(victima__icontains=query) |
+            Q(derecho_humano_violado__icontains=query) |
+            Q(resolucion__icontains=query) |
+            Q(calificacion__icontains=query) |
+            Q(direccion__icontains=query) |
+            Q(responsable__icontains=query) |
+            Q(estado__icontains=query)
         )
     else:
         resoluciones = ResolucionFinal.objects.all()

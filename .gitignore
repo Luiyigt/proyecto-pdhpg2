@@ -1,0 +1,14 @@
+<<<<<<< Updated upstream
+# Ignorar todos los archivos .exe
+*.exe
+*.pkg
+
+
+# Ignorar directorios de compilación
+/dist/
+/build/
+/resoluciones/Media/
+=======
+dist/
+*.exe
+>>>>>>> Stashed changes

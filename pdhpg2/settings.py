@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -48,11 +49,20 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'pdhpg2.urls'
-
+# Detecta si estamos corriendo en un ejecutable generado por PyInstaller
+if getattr(sys, 'frozen', False):
+    # Si es un ejecutable, ajusta la ruta de las plantillas y archivos estáticos
+    BASE_DIR = sys._MEIPASS
+else:
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Aquí especificamos el directorio base de plantillas
+        'DIRS': [
+            os.path.join(BASE_DIR, 'usuarios', 'templates'),
+            os.path.join(BASE_DIR, 'resoluciones', 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
