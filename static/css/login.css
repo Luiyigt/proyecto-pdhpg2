@@ -7,12 +7,13 @@
 
 body {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
   background-image: url('../img/paisaje.jpg'); /* Ruta ajustada para el fondo */
   background-size: cover;
-  background-position: center;
+  background-position: center center;  /* Centrar la imagen de fondo */
+  background-repeat: no-repeat;  /* Evitar que la imagen se repita */
 }
 
 .container-form {
@@ -21,9 +22,10 @@ body {
   box-shadow: 0 5px 7px rgba(0, 0, 0, .1);
   height: 500px;
   max-width: 900px;
-  transition: all 1s ease;
-  margin: 10px;
+  width: 100%;  /* Asegurar que el formulario ocupe todo el ancho disponible */
   background-color: rgba(255, 255, 255, 0.9); /* Fondo ligeramente transparente */
+  transition: all 1s ease;
+  margin: 20px; /* Margen pequeño para evitar que el formulario toque los bordes */
 }
 
 /* Sección del logo a la izquierda con fondo celeste */
@@ -41,16 +43,13 @@ body {
   height: auto;
 }
 
-
 /* Información lateral */
 .information {
   width: 40%;
   display: flex;
   align-items: center;
   text-align: center;
-  background-color: #c7eef3; /* Color de fondo celeste */
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  background-color: #c7eef3;
   justify-content: center;
 }
 
