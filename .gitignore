@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 # Ignorar todos los archivos .exe
 *.exe
 *.pkg
@@ -8,7 +8,6 @@
 /dist/
 /build/
 /resoluciones/Media/
-=======
+
 dist/
 *.exe
->>>>>>> Stashed changes
