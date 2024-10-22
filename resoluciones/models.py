@@ -12,7 +12,7 @@ class ResolucionFinal(models.Model):
     fecha_resolucion = models.DateField()  # Fecha de la resolución
     responsable = models.CharField(max_length=255, null=True, blank=True)  # Responsable de la violación del derecho humano
     estado = models.CharField(max_length=50, choices=[('Pendiente', 'Pendiente'), ('Resuelta', 'Resuelta'), ('En Proceso', 'En Proceso')])  # Estado de la resolución
-    archivo_adjunto = models.FileField(upload_to='resoluciones/', null=True, blank=True)  # Archivo adjunto
+    archivo_adjunto = models.FileField(upload_to='', null=True, blank=True)  # Archivo adjunto
     creado_por = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)  # Usuario que creó la resolución
     fecha_creacion = models.DateTimeField(auto_now_add=True)  # Fecha de creación del registro
 
