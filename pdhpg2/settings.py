@@ -106,7 +106,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),]
 
 MEDIA_URL = ''
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'resoluciones/media')
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'lista_resoluciones'
