@@ -5,7 +5,7 @@ a = Analysis(
     ['runserver.py'],
     pathex=[],
     binaries=[],
-    datas=[('usuarios/templates', 'usuarios/templates'), ('resoluciones/templates', 'resoluciones/templates'), ('static', 'static')],
+    datas=[('usuarios/templates', 'usuarios/templates'), ('resoluciones/templates', 'resoluciones/templates'), ('static', 'static'), ('db.sqlite3', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

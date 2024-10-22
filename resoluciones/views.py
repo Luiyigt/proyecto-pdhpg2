@@ -65,7 +65,7 @@ def detalle_resolucion(request, pk):
 
 @csrf_exempt
 @login_required
-@user_passes_test(lambda user: es_administrador_o_superusuario(user) or user.groups.filter(name='Auxiliar').exists() or user.groups.filter(name='policia').exists())
+@user_passes_test(lambda user: es_administrador_o_superusuario(user)or user.groups.filter(name='Administrador').exists() or user.groups.filter(name='Auxiliar').exists() or user.groups.filter(name='policia').exists())
 def crear_resolucion(request):
     if request.method == "POST":
         form = ResolucionForm(request.POST, request.FILES)

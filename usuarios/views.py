@@ -15,6 +15,7 @@ from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.views import View
 from django.shortcuts import render
+from django.contrib.auth.forms import UserCreationForm
 
 # Funciones de verificación de roles
 def es_administrador(user):
@@ -80,9 +81,13 @@ def crear_usuario(request):
             # Asignar rol al usuario basado en la selección
             role = request.POST.get('role')
             if role:  # Verifica si se seleccionó un rol
-                group = Group.objects.get(name=role)  # Se obtiene el grupo basado en el nombre del rol
-                user.groups.add(group)
-            
+                try:
+                    group = Group.objects.get(name=role)  # Se obtiene el grupo basado en el nombre del rol
+                    user.groups.add(group)
+                except Group.DoesNotExist:
+                    messages.error(request, f'El grupo {role} no existe. Por favor, verifica.')
+                    return redirect('crear_usuario')  # Redirige para corregir el error
+
             messages.success(request, 'Usuario creado exitosamente.')
             return redirect('login')  # Redirige al login después de crear el usuario
         else:
@@ -298,3 +303,27 @@ class SendEmailView(View):
             print("No se recibió ningún correo en la solicitud POST")
 
         return render(request, 'mail/send.html')
+def crear_usuario_simple(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+
+            # Obtener el rol seleccionado en el formulario
+            role = request.POST.get('role')
+            if role:
+                try:
+                    # Verificar si el grupo existe antes de asignarlo
+                    group = Group.objects.get(name=role)
+                    user.groups.add(group)
+                except Group.DoesNotExist:
+                    messages.error(request, f'El rol seleccionado "{role}" no existe.')
+
+            messages.success(request, 'Usuario creado exitosamente.')
+            return redirect('login')
+        else:
+            messages.error(request, 'Hubo un error al crear el usuario.')
+    else:
+        form = UserCreationForm()
+
+    return render(request, 'usuarios/crear_usuario_simple.html', {'form': form})
